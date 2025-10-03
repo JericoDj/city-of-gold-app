@@ -1,0 +1,108 @@
+/* src/components/NavBar/Navbar.css */
+.navbar {
+  width: 100%;
+  background-color: #0b1a3d;
+  color: gold;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 100;
+}
+
+.navbar-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 15%;
+}
+
+.navbar-left .navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-right button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.auth-btn,
+.home-btn {
+  background-color: gold;
+  color: #0b1a3d;
+}
+
+.auth-btn:hover,
+.home-btn:hover {
+  background-color: #ffd700cc;
+}
+
+.account-btn,
+.logout-btn {
+  background-color: transparent;
+  border: 2px solid gold;
+  color: gold;
+}
+
+.account-btn:hover,
+.logout-btn:hover {
+  background-color: gold;
+  color: #0b1a3d;
+}
+
+/* Hamburger menu for mobile */
+.navbar-burger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.navbar-burger .bar {
+  width: 25px;
+  height: 3px;
+  background-color: gold;
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    margin: 0 5%;
+  }
+
+  .navbar-right {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #0b1a3d;
+    flex-direction: column;
+    width: 200px;
+    padding: 1rem;
+    gap: 0.5rem;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .navbar-right.open {
+    transform: translateX(0);
+  }
+
+  .navbar-burger {
+    display: flex;
+  }
+}

@@ -1,0 +1,16 @@
+.profile-detail {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.profile-label {
+  font-weight: 600;
+  color: gold;
+}
+
+.profile-value {
+  font-weight: 500;
+  color: #d4d4d4;
+}

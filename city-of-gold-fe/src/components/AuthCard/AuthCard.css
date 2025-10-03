@@ -1,0 +1,93 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url("https://jooinn.com/images/view-of-city-street-at-night.jpg") no-repeat center center/cover;
+  color: gold;
+  padding: 2rem;
+}
+
+.auth-card {
+  background-color: rgba(11, 26, 61, 0.9);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.auth-error {
+  background-color: #ff4d4f;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-align: center;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+input {
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+input:focus {
+  box-shadow: 0 0 0 2px gold;
+}
+
+.auth-submit {
+  background-color: gold;
+  color: #0b1a3d;
+  font-weight: bold;
+  padding: 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-submit:hover {
+  background-color: #ffd700cc;
+}
+
+.auth-toggle-text {
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+.auth-toggle-link {
+  color: gold;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.auth-toggle-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .auth-card {
+    padding: 1.5rem;
+  }
+
+  input,
+  .auth-submit {
+    font-size: 0.95rem;
+  }
+}

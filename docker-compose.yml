@@ -1,20 +1,10 @@
 version: '3.8'
 
 services:
-  db:
-    image: mysql:8.0
-    container_name: city_of_gold_db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: supersecret
-      MYSQL_DATABASE: city_of_gold
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-    ports:
-      - "3306:3306"
-    volumes:
-      - db_data:/var/lib/mysql
 
+  # -----------------------------
+  # Clever Cloud MySQL (production / hosted)
+  # -----------------------------
   backend:
     build:
       context: ./city-of-gold-be
@@ -23,14 +13,12 @@ services:
     ports:
       - "4000:4000"
     environment:
-      DB_HOST: db
-      DB_USER: user
-      DB_PASSWORD: password
-      DB_NAME: city_of_gold
+      DB_HOST: bdgx8znj66odcc022qtw-mysql.services.clever-cloud.com
+      DB_USER: u8mpaehh5lm24bzn
+      DB_PASSWORD: 4tBnzDNUzh3bIuYYaAoj
+      DB_NAME: bdgx8znj66odcc022qtw
       DB_PORT: 3306
       JWT_SECRET: supersecret
-    depends_on:
-      - db
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -39,11 +27,56 @@ services:
     ports:
       - "8080:80"
     environment:
-      PMA_HOST: db
-      PMA_USER: user
-      PMA_PASSWORD: password
-    depends_on:
-      - db
+      PMA_HOST: bdgx8znj66odcc022qtw-mysql.services.clever-cloud.com
+      PMA_USER: u8mpaehh5lm24bzn
+      PMA_PASSWORD: 4tBnzDNUzh3bIuYYaAoj
 
-volumes:
-  db_data:
+  # -----------------------------
+  # Local MySQL container (dev/offline)
+  # -----------------------------
+  # db:
+  #   image: mysql:8.0
+  #   container_name: city_of_gold_db
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: rootpassword
+  #     MYSQL_DATABASE: city_of_gold
+  #     MYSQL_USER: user
+  #     MYSQL_PASSWORD: password
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - db_data:/var/lib/mysql
+
+  # backend:
+  #   build:
+  #     context: ./city-of-gold-be
+  #   container_name: city_of_gold_backend
+  #   restart: always
+  #   ports:
+  #     - "4000:4000"
+  #   environment:
+  #     DB_HOST: db
+  #     DB_USER: user
+  #     DB_PASSWORD: password
+  #     DB_NAME: city_of_gold
+  #     DB_PORT: 3306
+  #     JWT_SECRET: supersecret
+  #   depends_on:
+  #     - db
+
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   container_name: city_of_gold_phpmyadmin
+  #   restart: always
+  #   ports:
+  #     - "8080:80"
+  #   environment:
+  #     PMA_HOST: db
+  #     PMA_USER: user
+  #     PMA_PASSWORD: password
+  #   depends_on:
+  #     - db
+
+# volumes:
+#   db_data:  # only needed if using local MySQL

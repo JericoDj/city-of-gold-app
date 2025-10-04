@@ -1,11 +1,24 @@
+.background{
+  background: url("https://jooinn.com/images/view-of-city-street-at-night.jpg") no-repeat center center/cover;
+}
+
+
 .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url("https://jooinn.com/images/view-of-city-street-at-night.jpg") no-repeat center center/cover;
+  
   color: gold;
   padding: 2rem;
+
+
+  
+      opacity: 0; 
+  animation: fadeIn .5s ease-in-out forwards;
+
+
+  
 }
 
 .auth-card {

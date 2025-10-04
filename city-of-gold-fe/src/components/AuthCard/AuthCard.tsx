@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppContext } from "../../context/useAppContext";
+import { useAppContext } from "../../context/AppContext";
 import { loginUser } from "../../controller/LoginController";
 import { registerUser } from "../../controller/RegisterController";
 import "./AuthCard.css";
@@ -44,7 +44,8 @@ export const AuthCard: React.FC<AuthCardProps> = ({ mode }) => {
   };
 
   return (
-    <div className="auth-container">
+    <div className="background">
+      <div className="auth-container">
       <form className="auth-card" onSubmit={handleSubmit}>
         <h2 className="auth-title">{isLogin ? "Login" : "Create Account"}</h2>
 
@@ -107,5 +108,9 @@ export const AuthCard: React.FC<AuthCardProps> = ({ mode }) => {
         </p>
       </form>
     </div>
+
+
+    </div>
+    
   );
 };

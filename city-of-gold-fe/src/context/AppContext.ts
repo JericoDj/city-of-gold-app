@@ -1,5 +1,5 @@
 // src/context/AppContext.tsx
-import React, { createContext } from "react";
+import React, { createContext, useContext } from "react";
 import type { User } from "../types";
 
 interface AppContextType {
@@ -9,4 +9,14 @@ interface AppContextType {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+// Create context
 export const AppContext = createContext<AppContextType | undefined>(undefined);
+
+// Custom hook to consume context
+export const useAppContext = (): AppContextType => {
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error("useAppContext must be used within an AppProvider");
+  }
+  return context;
+};

@@ -9,27 +9,26 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isLoading, setIsLoading] = useState(false);
 
   // Fetch full user profile if token exists
-  useEffect(() => {
-    const loadProfile = async () => {
-      const token = localStorage.getItem("user");
-      if (token) {
-        setIsLoading(true);
-        try {
-          const profile = await fetchUserProfile();
-          setUser(profile);
-        
-          localStorage.setItem("userDetails", JSON.stringify(profile));
-        } catch (err) {
-          console.error("Failed to fetch user profile:", err);
-          setUser(null);
-        } finally {
-          setIsLoading(false);
-        }
+ useEffect(() => {
+  const loadProfile = async () => {
+    const token = localStorage.getItem("user");
+    if (token) {
+      setIsLoading(true);
+      try {
+        const profile = await fetchUserProfile();
+        setUser(profile);
+        localStorage.setItem("userDetails", JSON.stringify(profile));
+      } catch (err) {
+        console.error("Failed to fetch user profile:", err);
+        setUser(null);
+      } finally {
+        setIsLoading(false);
       }
-    };
+    }
+  };
 
-    loadProfile();
-  }, [user]);
+  loadProfile();
+}, [user]); 
 
   // Listen to storage events to sync between tabs
   useEffect(() => {

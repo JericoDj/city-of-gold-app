@@ -22,9 +22,9 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Routes
+
 app.get("/", (req: Request, res: Response) => {
-  res.send("okay");
+  res.send("api is running");
 });
  
 app.use("/api/auth", authRoutes);

@@ -5,8 +5,8 @@
     "outDir": "./dist",
 
     // Environment Settings
-    "target": "ES2020",                // good balance for Node 18/20
-    "module": "CommonJS",              // Node.js uses CommonJS by default
+    "target": "ES2020",                
+    "module": "CommonJS",            
     "esModuleInterop": true,           // allows default imports (import express from "express")
     "moduleResolution": "node",        // standard Node module resolution
     "types": ["node"],                 // load Node.js types

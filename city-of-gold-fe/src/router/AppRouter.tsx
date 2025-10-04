@@ -1,7 +1,7 @@
 // src/routes/AppRoutes.tsx
 import React, { type ReactNode } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useAppContext } from "../context/useAppContext";
+import { useAppContext } from "../context/AppContext";
 
 import { Home } from "../pages/Home/Home";
 import { Login } from "../pages/Login/Login";

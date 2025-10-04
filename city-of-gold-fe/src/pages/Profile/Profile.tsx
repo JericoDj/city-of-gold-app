@@ -1,6 +1,6 @@
 // src/pages/Profile.tsx
 import React, { useState } from "react";
-import { useAppContext } from "../../context/useAppContext";
+import { useAppContext } from "../../context/AppContext";
 import { ProfileDetail } from "../../components/ProfileDetail/ProfileDetail";
 import { UpdateProfileModal } from "../../components/UpdateProfileModal/UpdateProfileModal";
 import "./Profile.css";

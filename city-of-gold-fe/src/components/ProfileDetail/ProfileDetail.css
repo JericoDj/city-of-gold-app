@@ -3,11 +3,25 @@
   justify-content: space-between;
   padding: 0.5rem 0;
   border-bottom: 1px solid #ddd;
+
+
 }
 
 .profile-label {
   font-weight: 600;
   color: gold;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* optional slight upward motion */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .profile-value {

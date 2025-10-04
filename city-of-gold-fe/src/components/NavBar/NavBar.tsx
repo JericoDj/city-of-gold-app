@@ -1,7 +1,7 @@
 // src/components/NavBar/AppNavBar.tsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppContext } from "../../context/useAppContext";
+import { useAppContext } from "../../context/AppContext";
 import "./Navbar.css";
 
 const AppNavBar: React.FC = () => {
@@ -10,12 +10,18 @@ const AppNavBar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
-    setUser(null);
-    navigate("/login");
-    setMenuOpen(false);
-  };
+  
+  setMenuOpen(false);   
+  localStorage.removeItem("user"); 
+  localStorage.removeItem("userDetails");
+  setTimeout(() => {
+            setUser(null);  
+  navigate("/login");
+    
+  }, 10);
 
+
+};
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   return (

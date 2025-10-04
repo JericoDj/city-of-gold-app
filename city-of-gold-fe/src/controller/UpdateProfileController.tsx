@@ -4,6 +4,7 @@ import type { User } from "../types";
 interface UpdateProfilePayload {
   username: string;
   email: string;
+  password: string;
 }
 
 export const updateUserProfile = async (payload: UpdateProfilePayload): Promise<User> => {

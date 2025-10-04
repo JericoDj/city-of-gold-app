@@ -1,4 +1,4 @@
-import { db } from "../db";
+import { db } from "./db";
 
 export async function initTables() {
   try {
@@ -6,6 +6,7 @@ export async function initTables() {
 
     // Set session time zone to PH time
     await conn.query(`SET time_zone = '+08:00'`);
+    
 
     // Users table
     await conn.query(`

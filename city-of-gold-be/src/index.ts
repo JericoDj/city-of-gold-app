@@ -1,5 +1,5 @@
 import app from "./app";
-import { db } from "./db";
+import { db } from "./db/db";
 import { initTables } from "./db/initTables";
 
 const PORT = process.env.PORT || 4000;

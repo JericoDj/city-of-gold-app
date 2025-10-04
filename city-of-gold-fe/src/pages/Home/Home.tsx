@@ -3,6 +3,7 @@ import "./Home.css";
 
 export const Home: React.FC = () => {
   return (
+    
     <div className="home-container">
       <div className="overlay">
         <h1 className="home-title">City of Gold</h1>

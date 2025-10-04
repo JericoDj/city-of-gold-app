@@ -4,14 +4,14 @@ import type { User } from "../types";
 interface UpdateProfilePayload {
   username: string;
   email: string;
-  password: string;
+  password: string
 }
 
 export const updateUserProfile = async (payload: UpdateProfilePayload): Promise<User> => {
   const token = localStorage.getItem("user");
   if (!token) throw new Error("No token found");
-
-  const res = await fetch("http://localhost:4000/api/profile", {
+  const res = await fetch("https://city-of-gold-app-2.onrender.com/api/profile", {
+  // const res = await fetch("http://localhost:4000/api/profile", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

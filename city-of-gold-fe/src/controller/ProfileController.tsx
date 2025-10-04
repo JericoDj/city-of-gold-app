@@ -5,8 +5,8 @@ export const fetchUserProfile = async (): Promise<User> => {
   try {
     const token = localStorage.getItem("user");
     if (!token) throw new Error("No authentication token found");
-
-    const response = await fetch("http://localhost:4000/api/profile/", {
+     const response = await fetch("https://city-of-gold-app-2.onrender.com/api/profile/", {
+    // const response = await fetch("http://localhost:4000/api/profile/", {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${token}`,

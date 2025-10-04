@@ -9,7 +9,8 @@ interface RegisterPayload {
 
 export const registerUser = async (payload: RegisterPayload): Promise<User> => {
   try {
-    const response = await fetch("http://localhost:4000/api/auth/register", {
+    const response = await fetch("https://city-of-gold-app-2.onrender.com/api/auth/register", {
+    // const response = await fetch("http://localhost:4000/api/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

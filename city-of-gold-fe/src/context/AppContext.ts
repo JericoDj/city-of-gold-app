@@ -8,6 +8,7 @@ interface AppContextType {
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   initialLoading: boolean;
+  apiOk: boolean;
 }
 
 // Create context

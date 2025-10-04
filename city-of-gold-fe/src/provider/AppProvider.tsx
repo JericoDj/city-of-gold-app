@@ -8,45 +8,49 @@ interface AppProviderProps {
   children: React.ReactNode;
 }
 
-/**
- * AppProvider wraps the application and provides global state via AppContext.
- * Handles:
- *  - Current user state
- *  - Async loading flags for initial profile fetch and ongoing operations
- */
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(false); // for async operations like login/register
-  const [initialLoading, setInitialLoading] = useState(true); // true until initial profile fetch completes
+  const [isLoading, setIsLoading] = useState(false); // for async operations like login
+  const [initialLoading, setInitialLoading] = useState(true); // for first app load
+  const [apiOk, setApiOk] = useState(false); // API test result
 
-  // Fetch the user profile on first app load if a token exists
+  // Test API and fetch user profile if token exists
   useEffect(() => {
-    const loadProfile = async () => {
-      const token = localStorage.getItem("user");
-      if (token) {
-        try {
-          const profile = await fetchUserProfile();
-          setUser(profile);
-        } catch (err) {
-          console.error("Failed to fetch profile:", err);
-          setUser(null);
+    const initializeApp = async () => {
+      
+      try {
+        // 1️⃣ Test the API
+        const response = await fetch("https://city-of-gold-app-2.onrender.com/");
+        if (!response.ok) throw new Error("API not reachable");
+        
+        setApiOk(true);
+       
+
+        // 2️⃣ Fetch user profile if token exists
+        const token = localStorage.getItem("user");
+        if (token) {
+          try {
+            const profile = await fetchUserProfile();
+            setUser(profile);
+          } catch (err) {
+            console.error("Failed to fetch profile:", err);
+            setUser(null);
+          }
         }
+      } catch (err) {
+        console.error("API test failed:", err);
+        setApiOk(false);
+      } finally {
+        setInitialLoading(false);
       }
-      setInitialLoading(false); // done with initial loading
     };
 
-    loadProfile();
+    initializeApp();
   }, []);
 
   return (
     <AppContext.Provider
-      value={{
-        user,
-        setUser,
-        isLoading,
-        setIsLoading,
-        initialLoading,
-      }}
+      value={{ user, setUser, isLoading, setIsLoading, initialLoading, apiOk }}
     >
       {children}
     </AppContext.Provider>

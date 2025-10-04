@@ -15,10 +15,14 @@ const AppNavBar: React.FC = () => {
 
   setMenuOpen(false);   
   localStorage.removeItem("user"); 
-  localStorage.removeItem("userDetails");
+  
+    setTimeout(() => {
+    
+  }, 100);
   setTimeout(() => {
-            setUser(null);  
-  navigate("/login");
+    localStorage.removeItem("userDetails");
+    setUser(null);  
+    navigate("/login");
     
   }, 100);
 

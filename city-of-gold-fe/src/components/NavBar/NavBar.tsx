@@ -10,19 +10,23 @@ const AppNavBar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
-  
-
+      localStorage.removeItem("user");
+      localStorage.removeItem("userDetails"); 
 
   setMenuOpen(false);   
-  localStorage.removeItem("user"); 
+
   
     setTimeout(() => {
-    
-  }, 100);
+      setUser(null); 
+
+
+  }, 50);
   setTimeout(() => {
-    localStorage.removeItem("userDetails");
-    setUser(null);  
+    localStorage.removeItem("userDetails"); 
+   
+
     navigate("/login");
+ 
     
   }, 100);
 

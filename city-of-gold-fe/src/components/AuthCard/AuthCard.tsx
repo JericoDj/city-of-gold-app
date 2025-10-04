@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
 import { loginUser } from "../../controller/LoginController";
 import { registerUser } from "../../controller/RegisterController";
+import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner"; 
 import "./AuthCard.css";
 
 interface AuthCardProps {
@@ -14,7 +15,7 @@ export const AuthCard: React.FC<AuthCardProps> = ({ mode }) => {
   const { setUser } = useAppContext();
 
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState(""); // only for register
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -33,9 +34,9 @@ export const AuthCard: React.FC<AuthCardProps> = ({ mode }) => {
       } else {
         user = await registerUser({ email, username, password });
       }
-
-      setUser(user);
       navigate("/profile");
+      setUser(user);
+   
     } catch (err: any) {
       setError(err.message || (isLogin ? "Login failed" : "Registration failed"));
     } finally {
@@ -46,71 +47,77 @@ export const AuthCard: React.FC<AuthCardProps> = ({ mode }) => {
   return (
     <div className="background">
       <div className="auth-container">
-      <form className="auth-card" onSubmit={handleSubmit}>
-        <h2 className="auth-title">{isLogin ? "Login" : "Create Account"}</h2>
+        {/* ✅ Show spinner overlay when loading */}
+        {isLoading && <LoadingSpinner />}
 
-        {error && <div className="auth-error">{error}</div>}
+        <form className="auth-card" onSubmit={handleSubmit}>
+          <h2 className="auth-title">{isLogin ? "Login" : "Create Account"}</h2>
 
-        {!isLogin && (
-          <>
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              value={username}
-              placeholder="Enter your username"
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </>
-        )}
+          {error && <div className="auth-error">{error}</div>}
 
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          placeholder="Enter your email"
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          placeholder="Enter your password"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-
-        <button type="submit" className="btn auth-submit" disabled={isLoading}>
-          {isLoading ? (isLogin ? "Logging in..." : "Registering...") : isLogin ? "Login" : "Register"}
-        </button>
-
-        <p className="auth-toggle-text">
-          {isLogin ? (
+          {!isLogin && (
             <>
-              Don't have an account?{" "}
-              <span className="auth-toggle-link" onClick={() => navigate("/register")}>
-                Register
-              </span>
-            </>
-          ) : (
-            <>
-              Already have an account?{" "}
-              <span className="auth-toggle-link" onClick={() => navigate("/login")}>
-                Login
-              </span>
+              <label htmlFor="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                placeholder="Enter your username"
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
             </>
           )}
-        </p>
-      </form>
-    </div>
 
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            placeholder="Enter your email"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            placeholder="Enter your password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button type="submit" className="btn auth-submit" disabled={isLoading}>
+            {isLoading
+              ? isLogin
+                ? "Logging in..."
+                : "Registering..."
+              : isLogin
+              ? "Login"
+              : "Register"}
+          </button>
+
+          <p className="auth-toggle-text">
+            {isLogin ? (
+              <>
+                Don’t have an account?{" "}
+                <span className="auth-toggle-link" onClick={() => navigate("/register")}>
+                  Register
+                </span>
+              </>
+            ) : (
+              <>
+                Already have an account?{" "}
+                <span className="auth-toggle-link" onClick={() => navigate("/login")}>
+                  Login
+                </span>
+              </>
+            )}
+          </p>
+        </form>
+      </div>
     </div>
-    
   );
 };

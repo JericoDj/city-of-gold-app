@@ -11,6 +11,8 @@ const AppNavBar: React.FC = () => {
 
   const handleLogout = () => {
   
+
+    
   setMenuOpen(false);   
   localStorage.removeItem("user"); 
   localStorage.removeItem("userDetails");

@@ -14,6 +14,8 @@ const corsOptions = {
     'http://localhost:3000',
     'http://localhost:4000',
     'http://localhost:5000',
+    "city-of-gold-app-git-main-jericos-projects-f568a5b3.vercel.app",
+    "city-of-gold-nbsz3p4e2-jericos-projects-f568a5b3.vercel.app",
   ],
   credentials: true,
   optionsSuccessStatus: 200,

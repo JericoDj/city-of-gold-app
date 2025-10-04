@@ -18,7 +18,7 @@ const AppNavBar: React.FC = () => {
             setUser(null);  
   navigate("/login");
     
-  }, 10);
+  }, 100);
 
 
 };

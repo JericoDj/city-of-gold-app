@@ -4,6 +4,7 @@ import { useAppContext } from "../../context/AppContext";
 import { loginUser } from "../../controller/LoginController";
 import { registerUser } from "../../controller/RegisterController";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner"; 
+import { fetchUserProfile } from "../../controller/ProfileController";
 import "./AuthCard.css";
 
 interface AuthCardProps {
@@ -28,20 +29,30 @@ export const AuthCard: React.FC<AuthCardProps> = ({ mode }) => {
     setError("");
 
     try {
-      let user;
-      if (isLogin) {
-        user = await loginUser({ email, password });
-      } else {
-        user = await registerUser({ email, username, password });
-      }
-      navigate("/profile");
-      setUser(user);
-   
-    } catch (err: any) {
-      setError(err.message || (isLogin ? "Login failed" : "Registration failed"));
-    } finally {
-      setIsLoading(false);
-    }
+  let user;
+  if (isLogin) {
+    user = await loginUser({ email, password });
+  } else {
+    user = await registerUser({ email, username, password });
+  }
+  console.log("Authenticated user:", user);
+  setUser(user);
+  fetchUserProfile().then(profile => {
+    setUser(profile);
+    localStorage.setItem("userDetails", JSON.stringify(profile));
+  });
+  
+
+  // ✅ Navigate only on success
+  navigate("/profile");
+  
+
+} catch (err: any) {
+  setError(err.message || (isLogin ? "Login failed" : "Registration failed"));
+} finally {
+  setIsLoading(false); // always stop spinner
+}
+
   };
 
   return (

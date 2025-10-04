@@ -7,11 +7,15 @@ import { Home } from "../pages/Home/Home";
 import { Login } from "../pages/Login/Login";
 import { Register } from "../pages/Register/Register";
 import { Profile } from "../pages/Profile/Profile";
+import { LoadingSpinner } from "../components/LoadingSpinner/LoadingSpinner";
+
 
 const PrivateRoute: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { user } = useAppContext();
+  if (user === undefined) return <LoadingSpinner />; // still initial loading
   return <>{user ? children : <Navigate to="/login" replace />}</>;
 };
+
 
 const PublicRoute: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { user } = useAppContext();

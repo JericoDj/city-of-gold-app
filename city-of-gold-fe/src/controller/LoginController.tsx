@@ -29,6 +29,7 @@ export const loginUser = async ({ email, password }: LoginCredentials): Promise<
     if (data.token) {
       localStorage.setItem("user", data.token);
     }
+    
 
     // Return the user object
     return data.user as User;

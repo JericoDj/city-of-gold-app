@@ -10,6 +10,7 @@ db.getConnection()
     conn.query(`SET time_zone = '+08:00'`);
 
     initTables();
+  
     
     console.log(`MySQL connected (host: ${process.env.DB_HOST}, port: ${process.env.DB_PORT})`);
     conn.release(); 

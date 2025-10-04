@@ -9,7 +9,7 @@
     "module": "CommonJS",            
     "esModuleInterop": true,           // allows default imports (import express from "express")
     "moduleResolution": "node",        // standard Node module resolution
-    "types": ["node"],                 // load Node.js types
+    "types": ["node", "jest"],                 // load Node.js types
 
     // Other Outputs
     "sourceMap": true,
@@ -23,6 +23,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "src/index.ts"],
   "exclude": ["node_modules", "dist"]
 }

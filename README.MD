@@ -1,8 +1,3 @@
-I will correct the formatting errors in the Table of Contents (removing the Google search links and replacing them with correct internal Markdown anchor links) and integrate the provided external link for the live phpMyAdmin server under the **Live Demo & Repository** section and the **Running the Full Stack (Docker)** section.
-
-Here is the corrected and finalized Markdown file:
-
-````markdown
 # City of Gold Backend
 
 Backend service for the City of Gold project. Built with **Node.js**, **Express**, **TypeScript**, and **MySQL**, with JWT-based authentication, audit logging, and Docker support.
@@ -71,79 +66,70 @@ DB_PASSWORD=password
 DB_NAME=city_of_gold
 DB_PORT=3306
 JWT_SECRET=supersecret
-````
+Installation & Startup (Local without Docker)
+Configure MySQL Database and User:
 
------
+Log into your local MySQL server as the root user:
 
-## Installation & Startup (Local without Docker)
+Bash
 
-1.  **Configure MySQL Database and User:**
+mysql -u root -p
+# Enter your root password when prompted.
+Inside the MySQL shell, run the following SQL commands:
 
-      * Log into your local MySQL server as the root user:
-        ```bash
-        mysql -u root -p
-        # Enter your root password when prompted.
-        ```
-      * Inside the MySQL shell, run the following SQL commands:
-        ```sql
-        CREATE DATABASE IF NOT EXISTS city_of_gold;
-        CREATE USER IF NOT EXISTS 'user'@'localhost' IDENTIFIED BY 'password';
-        GRANT ALL PRIVILEGES ON city_of_gold.* TO 'user'@'localhost';
-        FLUSH PRIVILEGES;
-        EXIT;
-        ```
-        > **Note:** This uses the default user/password from the `.env` file.
+SQL
 
-2.  **Install Dependencies:**
+CREATE DATABASE IF NOT EXISTS city_of_gold;
+CREATE USER IF NOT EXISTS 'user'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON city_of_gold.* TO 'user'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+Note: This uses the default user/password from the .env file.
 
-      * Navigate into the backend directory and install packages:
-        ```bash
-        cd city-of-gold-be
-        npm install
-        ```
+Install Dependencies:
 
-3.  **Start the Backend:**
+Navigate into the backend directory and install packages:
 
-      * Run the development script:
-        ```bash
-        npm run dev
-        ```
+Bash
 
------
+cd city-of-gold-be
+npm install
+Start the Backend:
 
-## API Routes
+Run the development script:
 
-### Authentication
+Bash
 
-| Endpoint | Method | Description |
-| :--- | :--- | :--- |
-| `/api/auth/register` | `POST` | Register new user |
-| `/api/auth/login` | `POST` | Login user |
+npm run dev
+API Routes
+Authentication
+Endpoint	Method	Description
+/api/auth/register	POST	Register new user
+/api/auth/login	POST	Login user
 
-### Profile
+Export to Sheets
+Profile
+Endpoint	Method	Description
+/api/profile	GET	View authenticated user profile (JWT required)
+/api/profile	PUT	Update profile (triggers audit log)
 
-| Endpoint | Method | Description |
-| :--- | :--- | :--- |
-| `/api/profile` | `GET` | View authenticated user profile (JWT required) |
-| `/api/profile` | `PUT` | Update profile (triggers audit log) |
+Export to Sheets
+Database
+Database: MySQL database named city_of_gold
 
------
+Tables:
 
-## Database
+users: Stores user credentials
 
-  * **Database:** MySQL database named `city_of_gold`
-  * **Tables:**
-      * `users`: Stores user credentials
-      * `audit_logs`: Records login & profile updates
-  * **Schema:** Managed via migration scripts (e.g., Sequelize, Knex)
+audit_logs: Records login & profile updates
 
------
+Schema: Managed via migration scripts (e.g., Sequelize, Knex)
 
-## Docker Setup
+Docker Setup
+Example docker-compose.yml (includes MySQL, Backend, and phpMyAdmin for easy database access):
 
-Example `docker-compose.yml` (includes MySQL, Backend, and phpMyAdmin for easy database access):
+YAML
 
-```yaml
 version: '3.8'
 
 services:
@@ -193,62 +179,47 @@ services:
 
 volumes:
   db_data:
-```
+Running the Full Stack (Docker)
+Start Services:
 
------
+Bash
 
-## Running the Full Stack (Docker)
+docker-compose up -d
+Check Status:
 
-1.  **Start Services:**
+Bash
 
-    ```bash
-    docker-compose up -d
-    ```
+docker ps
+Expected containers: city_of_gold_db, city_of_gold_backend, city_of_gold_phpmyadmin.
 
-2.  **Check Status:**
+Access URLs:
 
-    ```bash
-    docker ps
-    ```
+Backend URL: http://localhost:4000
 
-    > Expected containers: `city_of_gold_db`, `city_of_gold_backend`, `city_of_gold_phpmyadmin`.
+Frontend URL (Demo): https://city-of-gold-app.vercel.app/
 
-3.  **Access URLs:**
+MySQL (via local phpMyAdmin): http://localhost:8080 (Login with user: user, pass: password)
 
-      * **Backend URL:** `http://localhost:4000`
-      * **Frontend URL (Demo):** [https://city-of-gold-app.vercel.app/](https://city-of-gold-app.vercel.app/)
-      * **MySQL (via local phpMyAdmin):** `http://localhost:8080` (Login with user: `user`, pass: `password`)
-      * **MySQL (Live via Render):** [https://city-of-gold-phpmyadmin-server.onrender.com/](https://city-of-gold-phpmyadmin-server.onrender.com/)
+MySQL (Live via Render): https://city-of-gold-phpmyadmin-server.onrender.com/
 
-4.  **Stop Containers:**
+Stop Containers:
 
-    ```bash
-    docker-compose down
-    ```
+Bash
 
------
-
-## Testing
-
+docker-compose down
+Testing
 Run backend unit tests:
 
-```bash
+Bash
+
 npm run test
-```
+Tests critical endpoints: login, profile update, registration.
 
-> Tests critical endpoints: login, profile update, registration.
-
------
-
-## Logs
-
+Logs
 View live logs for any container:
 
-```bash
+Bash
+
 docker logs -f city_of_gold_backend
 docker logs -f city_of_gold_db
 docker logs -f city_of_gold_phpmyadmin
-```
-
-```
-```

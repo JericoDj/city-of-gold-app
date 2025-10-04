@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
-import "./Navbar.css";
+import "./NavBar.css";
 
 const AppNavBar: React.FC = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const AppNavBar: React.FC = () => {
   const handleLogout = () => {
   
 
-    
+
   setMenuOpen(false);   
   localStorage.removeItem("user"); 
   localStorage.removeItem("userDetails");

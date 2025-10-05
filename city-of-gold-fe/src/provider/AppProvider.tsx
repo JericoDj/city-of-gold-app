@@ -26,6 +26,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         setApiOk(true);
        
 
+        
         // 2️⃣ Fetch user profile if token exists
         const token = localStorage.getItem("user");
         if (token) {
